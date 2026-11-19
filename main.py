@@ -1,4 +1,3 @@
-
 from bakery import assert_equal
 from drafter import *
 from dataclasses import dataclass
@@ -16,7 +15,6 @@ set_site_information(
 hide_debug_information()
 set_website_framed(False)
 
-
 @dataclass
 class Password:
     group: str
@@ -24,10 +22,9 @@ class Password:
     password: str
     username: str
 
-
 @dataclass
 class State:
-    passwords: list[Password]
+    passwords:list[Password]
     generated_password: str
     selected_password: str
     password_length: int
@@ -94,7 +91,7 @@ def generate_password(state: State, password_length: int,
 
     while password_length > 0:
         password_length = password_length - 1
-        password = password + random.choice(characters)
+        password += random.choice(characters)
 
     state.generated_password = password
 
@@ -143,7 +140,7 @@ def view_passwords(state: State) -> Page:
         contents.append("\n --------------------")
 
     contents.append(Button("home", home))
-    contents.append(Button("view_groups", view_groups))
+    contents.append(Button("view groups", view_groups))
 
     return Page(state, contents)
 
@@ -179,6 +176,7 @@ def modify_password(state: State) -> Page:
         TextBox("application", "application"),
         TextBox("username", "username"),
         TextBox("new_password", "new_password"),
+        TextBox("new_group", "new_group"),
         Button("update password", update_password),
         Button("home", home)
     ])
